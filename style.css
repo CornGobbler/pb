@@ -13,33 +13,38 @@ html, body { min-height: 100%; }
 body {
   font-family: "Barlow", system-ui, sans-serif;
   color: var(--chalk);
-  background: var(--ink);
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, #4a0919 0%, #1c0810 50%, var(--ink) 85%) fixed,
+    var(--ink);
   overflow-x: hidden;
 }
 
 /* ---------- Background: image + parallax + vignette ---------- */
 .bg {
   position: fixed;
-  inset: -4%;
+  top: 50%;
+  left: 50%;
+  width: min(1100px, 100vw);
+  aspect-ratio: 16 / 9;
   background: url("bg.png") center / cover no-repeat;
   filter: saturate(1.15) contrast(1.05);
-  transform: translate(var(--mx, 0px), var(--my, 0px)) scale(1.04);
+  transform: translate(calc(-50% + var(--mx, 0px)), calc(-50% + var(--my, 0px)));
   transition: transform 0.25s ease-out;
-  animation: drift 18s ease-in-out infinite alternate;
+  /* fade every edge into the page so there is no hard border */
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%);
 }
 
-@keyframes drift {
-  from { background-position: 48% 50%; }
-  to   { background-position: 52% 50%; }
+/* on tall/portrait screens, show the image larger so the players stay big */
+@media (max-aspect-ratio: 1/1) {
+  .bg { width: 170vw; }
 }
 
 .shade {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(to bottom, rgba(7,6,10,.88) 0%, rgba(7,6,10,.25) 28%, rgba(7,6,10,.15) 45%, rgba(7,6,10,.9) 100%),
-    radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(7,6,10,.7) 100%);
+  background: linear-gradient(to bottom, rgba(7,6,10,.7) 0%, rgba(7,6,10,0) 25%, rgba(7,6,10,0) 55%, rgba(7,6,10,.85) 100%);
 }
 
 #embers {
@@ -154,6 +159,26 @@ h1 {
   color: var(--red);
 }
 
+.play {
+  display: inline-block;
+  margin: 4px 0 18px;
+  padding: 16px 40px;
+  font-family: "Big Shoulders Display", Impact, sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: var(--red);
+  border-radius: 999px;
+  box-shadow: 0 0 30px var(--red-glow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.play[hidden] { display: none; }
+.play:hover { transform: scale(1.05); box-shadow: 0 0 44px var(--red-glow); }
+.play:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+
 .when {
   font-size: clamp(1.05rem, 2.8vw, 1.4rem);
   font-weight: 600;
@@ -178,13 +203,6 @@ h1 {
 body.live .num { text-shadow: 0 0 26px rgba(61, 220, 132, 0.7); }
 body.live .cell { border-color: rgba(61, 220, 132, 0.5); box-shadow: 0 0 24px rgba(61,220,132,.2), inset 0 -3px 0 #3ddc84; }
 body.live .lbl { color: #3ddc84; }
-
-@media (max-width: 520px) {
-  .shade {
-    background:
-      linear-gradient(to bottom, rgba(7,6,10,.9) 0%, rgba(7,6,10,.3) 30%, rgba(7,6,10,.35) 50%, rgba(7,6,10,.92) 100%);
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .bg, .logo, .num.bump { animation: none; }
