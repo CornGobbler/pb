@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Practical Basketball – Countdown to Release</title>
+  <meta name="description" content="Live countdown to the Practical Basketball release on Roblox: October 30, 3:00 PM PDT.">
+  <meta property="og:title" content="Practical Basketball releases October 30 at 3 PM PDT">
+  <meta property="og:description" content="Live countdown to launch day.">
+  <meta property="og:image" content="bg.png">
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg" id="bg"></div>
+  <div class="shade"></div>
+  <canvas id="embers" aria-hidden="true"></canvas>
+
+  <main>
+    <header>
+      <img class="logo" src="logo.png" alt="Practical Basketball logo" width="96" height="96">
+      <h1>Practical Basketball</h1>
+    </header>
+
+    <div class="bottom">
+      <p class="tagline" id="tagline">Tip-off on Roblox is almost here.</p>
+
+      <section class="board" aria-label="Countdown to release" role="timer">
+        <div class="cell"><span class="num" id="days">00</span><span class="lbl">Days</span></div>
+        <div class="cell"><span class="num" id="hours">00</span><span class="lbl">Hours</span></div>
+        <div class="cell"><span class="num" id="minutes">00</span><span class="lbl">Minutes</span></div>
+        <div class="cell"><span class="num" id="seconds">00</span><span class="lbl">Seconds</span></div>
+      </section>
+
+      <p class="when">Releases Friday, October 30 at 3:00 PM PDT</p>
+      <p class="local" id="local"></p>
+      <p class="fine">Unofficial fan countdown. Not affiliated with Practical's Games or Roblox.</p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
