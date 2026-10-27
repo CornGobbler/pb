@@ -35,6 +35,8 @@ function tick() {
     Object.values(els).forEach((el) => setNum(el, "00"));
     document.body.classList.add("live");
     document.getElementById("tagline").textContent = "Practical Basketball is out now. Go hoop!";
+    document.getElementById("when").textContent = "Released Friday, October 30 at 3:00 PM PDT";
+    document.getElementById("play").hidden = false;
     clearInterval(timer);
     return;
   }
